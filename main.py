@@ -49,6 +49,46 @@ if __name__ == '__main__':
 
         val_data = [data[0][61:87], data[1][61:87]]
         test_data = [data[0][87:], data[1][87:]]
+        
+    if args.region == "US_Delta":
+        N = 65853700  
+        
+        rs = np.asarray([40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100])
+        # rs = np.asarray([100, 105, 110, 115, 120, 140, 145, 150, 155, 160, 170])
+
+        data = JHU_global()
+        # data = NYTimes(level='states')
+
+        start_date = '2021-6-3'
+
+        # train_data_raw = [data.get(start_date, '2021-12-16', "US"), data.get('2021-12-16', '2022-1-27', "US")]
+        data_raw = list(data.get(start_date, '2021-10-27', "US"))
+
+        temp = list(data.get('2021-5-25', '2021-5-26', 'US'))
+
+        data = []
+        
+        data_confirm = data_raw[0] - temp[0][0]
+        data_fatality = data_raw[1] - temp[1][0]
+
+        data += [rolling_average(data_confirm), rolling_average(data_fatality)]
+
+        train_data = [[data[0][:24], data[1][:24]], [data[0][24:76], data[1][24:76]]]
+        # train_data = [[data[0][:55], data[1][:55]]]
+        data_confirm = train_data[0][0]
+        data_fatality = train_data[0][1]
+
+        val_data = [data[0][75:107], data[1][75:107]]
+        test_data = [data[0][107:], data[1][107:]]
+
+        # plt.xticks([])
+        # plt.yticks([])
+        # plt.plot(np.diff(train_data[0][0].tolist()))
+        # plt.plot(np.diff(train_data[1][0].tolist()))
+        # plt.title("Averaged data")
+        # # plt.plot(train_data[1][0])
+        # plt.show()
+
 
     elif args.region == 'California':
         N = 12300000
@@ -79,6 +119,120 @@ if __name__ == '__main__':
 
         val_data = [data[0][57:87], data[1][57:87]]
         test_data = [data[0][87:], data[1][87:]]
+
+        # plt.xticks([])
+        # plt.yticks([])
+        # plt.plot(np.diff(train_data[0][0].tolist()))
+        # plt.plot(np.diff(train_data[1][0].tolist()))
+        # plt.title("Averaged data")
+        # # plt.plot(train_data[1][0])
+        # plt.show()
+
+    elif args.region == 'Texas':
+        N = 11200000
+        
+        rs = np.asarray([35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95])
+        # rs = np.asarray([100, 105, 110, 115, 120, 140, 145, 150, 155, 160, 170])
+
+        data = JHU_US(level='states')
+
+        start_date = '2021-11-30'
+
+        # train_data_raw = [data.get(start_date, '2021-12-16', "US"), data.get('2021-12-16', '2022-1-27', "US")]
+        data_raw = list(data.get(start_date, '2022-4-10', "Texas"))
+
+        temp = list(data.get('2021-11-15', '2021-11-16', 'Texas'))
+
+        data = []
+        
+        data_confirm = data_raw[0] - temp[0][0]
+        data_fatality = data_raw[1] - temp[1][0]
+
+        data += [rolling_average(data_confirm), rolling_average(data_fatality)]
+
+        train_data = [[data[0][:30], data[1][:30]], [data[0][30:57], data[1][30:57]]]
+        # train_data = [[data[0][:55], data[1][:55]]]
+        data_confirm = train_data[0][0]
+        data_fatality = train_data[0][1]
+
+        val_data = [data[0][57:87], data[1][57:87]]
+        test_data = [data[0][87:], data[1][87:]]
+
+        # plt.xticks([])
+        # plt.yticks([])
+        # plt.plot(np.diff(train_data[0][0].tolist()))
+        # plt.plot(np.diff(train_data[1][0].tolist()))
+        # plt.title("Averaged data")
+        # # plt.plot(train_data[1][0])
+        # plt.show()
+
+    elif args.region == 'Florida':
+        N = 9200000
+        
+        # rs = np.asarray([35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95])
+        rs = np.asarray([100, 105, 110, 115, 120, 140, 145, 150, 155, 160, 170])
+
+        data = JHU_US(level='states')
+
+        start_date = '2021-11-26'
+
+        # train_data_raw = [data.get(start_date, '2021-12-16', "US"), data.get('2021-12-16', '2022-1-27', "US")]
+        data_raw = list(data.get(start_date, '2022-4-10', "Florida"))
+
+        temp = list(data.get('2021-11-15', '2021-11-16', 'Florida'))
+
+        data = []
+        
+        data_confirm = data_raw[0] - temp[0][0]
+        data_fatality = data_raw[1] - temp[1][0]
+
+        data += [rolling_average(data_confirm), rolling_average(data_fatality)]
+
+        train_data = [[data[0][:28], data[1][:28]], [data[0][28:55], data[1][28:55]]]
+        # train_data = [[data[0][:55], data[1][:55]]]
+        data_confirm = train_data[0][0]
+        data_fatality = train_data[0][1]
+
+        val_data = [data[0][54:84], data[1][54:84]]
+        test_data = [data[0][84:], data[1][84:]]
+
+        # plt.xticks([])
+        # plt.yticks([])
+        # plt.plot(np.diff(train_data[0][0].tolist()))
+        # plt.plot(np.diff(train_data[1][0].tolist()))
+        # plt.title("Averaged data")
+        # # plt.plot(train_data[1][0])
+        # plt.show()
+    
+    elif args.region == 'New York':
+        N = 10000000
+        
+        # rs = np.asarray([35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95])
+        rs = np.asarray([115, 120, 140, 145, 150, 155, 160, 170])
+
+        data = JHU_US(level='states')
+
+        start_date = '2021-11-14'
+
+        # train_data_raw = [data.get(start_date, '2021-12-16', "US"), data.get('2021-12-16', '2022-1-27', "US")]
+        data_raw = list(data.get(start_date, '2022-4-10', "New York"))
+
+        temp = list(data.get('2021-11-5', '2021-11-6', 'New York'))
+
+        data = []
+        
+        data_confirm = data_raw[0] - temp[0][0]
+        data_fatality = data_raw[1] - temp[1][0]
+
+        data += [rolling_average(data_confirm), rolling_average(data_fatality)]
+
+        train_data = [[data[0][:14], data[1][:14]], [data[0][14:58], data[1][14:58]]]
+        # train_data = [[data[0][:55], data[1][:55]]]
+        data_confirm = train_data[0][0]
+        data_fatality = train_data[0][1]
+
+        val_data = [data[0][57:84], data[1][57:84]]
+        test_data = [data[0][84:], data[1][84:]]
 
         # plt.xticks([])
         # plt.yticks([])
@@ -168,10 +322,10 @@ if __name__ == '__main__':
     print(f"Optimal r = {optimal_r}, best Val loss: {min_val_loss}, Test loss: {test_loss}")
     
     beta, gamma, sigma, mu, omega = optimal_params[1][0]
-    print(f"Optimal model parameters for the first part: beta = {beta}, gamma = {gamma}, sigma = {sigma}, mu = {mu}, omega = {omega}")
+    print(f"Optimal model parameters for the first part: beta = {beta}, gamma = {gamma}, sigma = {sigma}, mu = {mu / sigma}, omega = {omega / gamma}")
 
     beta, gamma, sigma, mu, omega = optimal_params[1][1]
-    print(f"Optimal model parameters for the second part: beta = {beta}, gamma = {gamma}, sigma = {sigma}, mu = {mu}, omega = {omega}")
+    print(f"Optimal model parameters for the second part: beta = {beta}, gamma = {gamma}, sigma = {sigma}, mu = {mu / sigma}, omega = {omega / gamma}")
 
     start = train_start_date
     end = start + dt.timedelta(days=len(daily_increases[0]))
